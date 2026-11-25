@@ -1,0 +1,15 @@
+# Secrets - they live only in the private folder (GOOGLE_PRIVATE_DIR)
+token.json
+client_secret*.json
+credentials.json
+.env
+
+# Local environment
+.venv/
+__pycache__/
+# Local agent registration (contains a personal path)
+.agents/
+# Raw run logs contain personal data (email address, real emails, event links)
+logs/
+# Lecturer's slides - course material, not ours to publish
+*slides*.html
