@@ -1,6 +1,6 @@
 """Self-test (step 6): start the server over stdio, list its tools, call list_events(1).
 
-Run:  $env:GOOGLE_PRIVATE_DIR = "C:\\Users\\<you>\\google_private"; uv run test_server.py
+Run:  $env:GOOGLE_PRIVATE_DIR = "C:\\path\\to\\private-folder"; uv run test_server.py
 Read-only: it does not create drafts or events.
 """
 import asyncio

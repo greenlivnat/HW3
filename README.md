@@ -70,7 +70,9 @@ Notes from doing it on Windows/PowerShell:
 7. Step 11: *Great. Now send the "L06 test" draft.* / *Delete the "Study group" event.*
 8. Step 13 ⭐: *Act as my meeting coordinator. Find the latest meeting request in my email … Never send anything.*
 
-Results of every prompt are summarised in [reflection.md](reflection.md).
+**Full prompt log** – every prompt (ours to the coding agent, and the lesson prompts), in order,
+with what the agent did and the result: [PROMPTS.md](PROMPTS.md).
+The checks are summarised in [reflection.md](reflection.md).
 
 ## Screenshots
 Personal details (Windows user name in a path, one unrelated private email draft) are blacked out.
