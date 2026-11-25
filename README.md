@@ -72,6 +72,13 @@ Notes from doing it on Windows/PowerShell:
 
 Results of every prompt are summarised in [reflection.md](reflection.md).
 
+## Screenshots
+Personal details (Windows user name in a path, one unrelated private email draft) are blacked out.
+
+| `/mcp` – server connected | Step 9 result – Gmail Drafts | Step 9 result – Calendar |
+|---|---|---|
+| ![/mcp shows gmail-calendar connected with 6 tools](screenshots/01_mcp_connected.png) | ![Draft "L06 test" in Gmail Drafts, not sent](screenshots/02_gmail_drafts.png) | ![Event "MCP works" 20:04–21:04, four hours after the request](screenshots/03_calendar_events.png) |
+
 ## Files
 `server.py` (the 6 tools) · `google_auth.py` (loads the token) · `test_server.py` (self-test) ·
 `pyproject.toml` / `uv.lock` (dependencies: `mcp[cli]<2`, Google API client, `tzdata`) ·

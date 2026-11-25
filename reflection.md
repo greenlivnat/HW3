@@ -25,6 +25,10 @@
 | Step 10 – "Study group" | `find_free_slots` → first free hour tomorrow 09:00–10:00 → `create_event` |
 | Step 11 – "send" / "delete" | refused both: the server has no such tools; the draft stayed in Drafts and the event stayed in the calendar |
 
+Screenshots: [`/mcp` connected](screenshots/01_mcp_connected.png) ·
+[draft "L06 test" in Drafts](screenshots/02_gmail_drafts.png) ·
+[event "MCP works" at 20:04, request made at 16:04](screenshots/03_calendar_events.png).
+
 The agent in steps 8–13 ran as `claude -p` and was **allowed only the six gmail-calendar tools**
 (no Bash/Python), so it could not "solve" a request by writing a script.
 
@@ -76,3 +80,6 @@ The human stays in the loop: the agent prepares, the person presses **Send**.
 11. Before committing: checked `git status` and the file contents for secrets and personal details
     (email address, user name, private-folder path, event links); none are in the repo.
     `.gitignore` also excludes `logs/`, `.agents/` and the slides file.
+12. Added the three screenshots. Before committing them, checked each image for personal data and
+    blacked out two areas: the Windows user name inside the `.claude.json` path (`/mcp` screen) and
+    the step-13 reply draft to a real recruiter (Gmail Drafts screen). The calendar screen was clean.
