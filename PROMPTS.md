@@ -1,6 +1,6 @@
 # Prompt log – HW3 (L06: gmail-calendar MCP server)
 
-Every prompt used in this assignment, in order, with what the agent did and the result.
+Original prompts and lesson steps with the documented actions and results.
 Agent: **Claude Code** (Opus). Personal details (email address, Windows user name, private paths,
 event links, contents of real emails) are replaced with placeholders such as
 `C:\path\to\private-folder` and `<my-email>`.
@@ -13,10 +13,16 @@ There are two kinds of prompts here:
     **directly as part of brief A1** (it did the same work in the same session); they were not pasted
     one by one. The prompt text is kept here because it is what the work was measured against.
   - Steps 8–11 and 13 were **sent literally** as new agent runs: `claude -p "<prompt>"` in the HW3 folder,
-    with the agent allowed **only the six gmail-calendar MCP tools**
-    (`--allowedTools mcp__gmail-calendar__…`), so it could not answer by writing code.
+    with the intended allowlist of **six gmail-calendar MCP tools**
+    (`--allowedTools mcp__gmail-calendar__…`).
 
 ---
+
+<div dir="rtl">
+
+סדר הסעיפים המקורי נשמר. שלב 12 מופיע אחרי שלב 14, ואין בתיעוד הסבר או די ראיות לקביעת סדר הביצוע בפועל. רשימת ששת הכלים מתארת את הגבול שהוגדר לפרויקט. לפי תיעוד שלב 11, הסוכן ניסה לפנות למחבר אחר כדי למחוק אירוע, והפעולה נעצרה בבקשת הרשאה. שם המחבר והגדרות ההרשאה המלאות אינם ידועים.
+
+</div>
 
 ## A1 – the assignment brief (Hebrew, to the coding agent)
 > השיעור אנחנו לומדים MCP. פתחתי למשימה שקיבלנו תיקיה חדשה C:\biu01\LO7 בו נמצאת גם מצגת השיעור המלאה.
@@ -182,3 +188,15 @@ and this full log.
 > "L06 gmail-calendar MCP server".
 
 Result: `git status` showed only code and docs; commit `L06 gmail-calendar MCP server` pushed to HW3.
+
+---
+
+<div dir="rtl">
+
+## תרומת ליאת — סקירה ותיעוד בסיוע Codex
+
+1. [הפרומפט המקורי לסקירה בקריאה בלבד](prompts/01-reflection-preparation.txt) ביקש לבסס את ארבע שאלות הרפלקציה על קוד, צילומים ותיעוד הרצות, ולאתר פערים. הסקירה מצאה שבדיקת העשן אינה מכשילה את עצמה בעת שגיאת Google, שזיהוי הכפילות היה החלטת הסוכן, ושמחבר אחר הוא חלק מגבול ההרשאות של המארח.
+2. [הפרומפט המלא להשלמת התיעוד ולפרסום](prompts/02-documentation-and-publication.txt) כולל את הנוסח של הרפלקציה שאישרה ליאת. שני הקבצים הועתקו מתוכן הודעות המשתמש בשיחה. ההודעה השנייה כוללת את הכפילות כפי שנשלחה.
+3. סבב התיעוד יצר PRD ותיעוד שיתוף פעולה, שילב את הרפלקציה המאושרת ואת נספח הראיות בעברית ושיפר את README. נבדקו החתימות מול הקוד, הראיות הקיימות, הצילומים והיקף השינויים. לא בוצעו הרצות חדשות מול Google ולא נבדקו אסימונים פרטיים.
+
+</div>

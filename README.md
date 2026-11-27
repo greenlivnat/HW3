@@ -1,52 +1,79 @@
-# HW3 – `gmail-calendar` MCP server
+<div dir="rtl">
 
-An MCP server in Python (FastMCP, run with **uv**, **stdio** transport) that gives an AI agent
-(Claude Code, agy, Codex…) six tools for Gmail and Google Calendar.
-It is the L05 exercise (draft + event) done again — this time the agent picks the tools itself.
+# מטלה 03 — שרת MCP ל־Gmail ול־Google Calendar
 
-## Tools
+**אוניברסיטת בר־אילן · קורס בינה מלאכותית יוצרת · קבוצה LIATLVNT**
 
-| Tool | What it does | Google API call |
+ליאת קפזידר (Liat Kafezider) ולבנת בנסון (Livnat Benson)
+
+הפרויקט מיישם מחדש את תרגיל L05: הכנת טיוטה והוספת אירוע. ב־L05 סקריפט Python קבע את סדר הקריאות. ב־L06 המודל בוחר כלים ופרמטרים לפי הבקשה, והשרת מבצע את קריאות ה־API. אותם כלים מאפשרים גם לבדוק זמינות ולתאם פגישה ממייל.
+
+## ארכיטקטורה
+
+Claude Code הוא המארח שהודגם. הוא מפעיל את שרת FastMCP באמצעות `uv` ומתקשר איתו ב־`stdio`. פונקציות Python פונות ל־Google באמצעות OAuth. הקו המקווקו מציג נתיב אפשרי דרך מחבר נוסף של המארח, כפי שעלה בבדיקת הגבולות.
+
+</div>
+
+```mermaid
+flowchart LR
+    U["בקשת משתמש"] --> H["Claude Code"]
+    H -->|MCP / stdio| S["gmail-calendar / FastMCP"]
+    S --> G["search_emails / read_email / create_draft"]
+    S --> C["list_events / find_free_slots / create_event"]
+    G --> GA["Gmail API"]
+    C --> CA["Google Calendar API"]
+    H -.-> X["מחבר נוסף בכפוף להרשאות המארח"]
+```
+
+<div dir="rtl">
+
+## כלים
+
+| חתימה | התנהגות | ממשק Google |
 |---|---|---|
-| `search_emails(query, max_results)` | Search Gmail (Gmail search syntax), read-only | `gmail users.messages.list` + `get` (metadata) |
-| `read_email(message_id)` | Headers + plain-text body of one email, read-only | `gmail users.messages.get` |
-| `create_draft(to, subject, body)` | Creates a **draft only** – never sends | `gmail users.drafts.create` |
-| `list_events(days_ahead)` | Events from now until the end of day N, read-only | `calendar events.list` |
-| `find_free_slots(date, duration_minutes)` | Free slots on one day (default 09:00–17:00), read-only | `calendar freebusy.query` |
-| `create_event(title, start, end, description)` | Creates one event – cannot edit/delete | `calendar events.insert` |
+| `search_emails(query, max_results=10)` | חיפוש בתחביר Gmail, עם תקרה של 50 תוצאות. מחזיר מזהה, שולח, נושא, תאריך ותקציר. | `users.messages.list` ו־`users.messages.get` למטא־נתונים |
+| `read_email(message_id)` | קריאת כותרות וגוף טקסט פשוט, או תקציר חלופי, עד 8,000 תווים. | `users.messages.get` |
+| `create_draft(to, subject, body)` | שמירת טיוטה בלבד. עבור `me`, הכתובת נלקחת מפרופיל החשבון. | `users.getProfile` לפי הצורך ו־`users.drafts.create` |
+| `list_events(days_ahead=1)` | אירועי היומן הראשי מעכשיו עד סוף היום המבוקש. `0` הוא היום ו־`1` כולל גם את מחר. | `events.list` |
+| `find_free_slots(date, duration_minutes=60, day_start="09:00", day_end="17:00")` | חלונות זמינות ביומן הראשי שאורכם לפחות כמשך המבוקש. | `freebusy.query` |
+| `create_event(title, start, end, description="")` | הוספת אירוע ביומן הראשי. ההתחלה והסוף בפורמט ISO והסוף חייב להיות מאוחר מההתחלה. | `events.insert` |
 
-**Left out on purpose:** sending email (`users.messages.send`, `drafts.send`) and deleting
-anything (emails or events). The agent prepares, the human sends/deletes.
-Time zone everywhere: **Asia/Jerusalem**.
+## דרישות והרצה
 
-## Secrets – never in this repo
-The server reuses last week's OAuth client and `token.json` (scopes `gmail.modify`, `calendar`).
-They stay in a private folder outside the project; the server only reads the path from the
-environment variable **`GOOGLE_PRIVATE_DIR`** (a folder, not a file). The server never opens a
-browser: if the token is missing/invalid it returns a clear error – run last week's program once
-to create a new `token.json`. `.gitignore` blocks `token.json`, `client_secret*.json`,
-`credentials.json`, `.env`.
+נדרשים Python 3.13 ומעלה, `uv`, מארח MCP והגדרת OAuth תקפה מתרגיל L05. הפרויקט משתמש ב־FastMCP (`mcp[cli]<2`), בלקוח Google API, בספריות Google Auth וב־`tzdata`. זמן מקומי מפורש לפי `Asia/Jerusalem`.
 
-## Run
+הגדירו את `GOOGLE_PRIVATE_DIR` כנתיב לתיקייה פרטית מחוץ למאגר. מימוש השרת טוען את `token.json` מהתיקייה ויכול לרענן אותו באותו מקום. קובץ הלקוח והאסימון נשארים מחוץ למאגר. אם אין אסימון שמיש, יש להפיק אותו באמצעות התוכנית של L05. השרת אינו פותח דפדפן. `.gitignore` כולל את `token.json`, `client_secret*.json`, `credentials.json` ו־`.env`.
+
+</div>
+
 ```powershell
 uv sync
 $env:GOOGLE_PRIVATE_DIR = "C:\path\to\private-folder"
 uv run test_server.py      # self-test: lists the 6 tools and calls list_events(1)
 ```
 
-## Connect to an agent
-**Claude Code** (local scope – stored in `~/.claude.json`, not in this repo):
+<div dir="rtl">
+
+בדיקת העשן מפעילה את השרת ומוודאת את שמות ששת הכלים. היא פונה ל־Google בקריאת `list_events(1)`. יש לקרוא את שורת התוצאה: הסקריפט מדפיס `OK` בסיום גם אם `isError` מציין שגיאה. הבדיקה אינה בודקת כתיבות.
+
+### חיבור ל־Claude Code
+
+הרישום מקומי לפרויקט ונשמר מחוץ למאגר ב־`~/.claude.json`. אחרי הרישום הפעילו מחדש את Claude Code והקלידו `/mcp`. ב־PowerShell יש להציב את שם השרת לפני `--env`, לצטט את המפריד `'--'`, ובמקרה ש־`uv` אינו מזוהה להשתמש בנתיב המלא ל־`uv.exe`.
+
+</div>
+
 ```powershell
 claude mcp add gmail-calendar --scope local --transport stdio --env GOOGLE_PRIVATE_DIR=C:\path\to\private-folder '--' uv run --directory C:\path\to\HW3 server.py
 ```
-Then restart `claude` and type `/mcp` → `gmail-calendar ✔ connected · 6 tools`.
 
-Notes from doing it on Windows/PowerShell:
-- put the server **name before** `--env` (otherwise `--env` swallows the name);
-- quote the separator as `'--'` (PowerShell eats a bare `--`);
-- if `/mcp` shows *failed* and `uv` was installed recently, use the full path to `uv.exe`.
+<div dir="rtl">
 
-**agy (Antigravity)** – `.agents/mcp_config.json` (kept out of Git because it holds a local path):
+### דוגמת הגדרה ל־Antigravity (agy)
+
+הקובץ המקומי `.agents/mcp_config.json` מוחרג מ־Git. זו דוגמת תצורה. החיבור המתועד בוצע ב־Claude Code. Codex מוזכר כמארח אפשרי.
+
+</div>
+
 ```json
 { "mcpServers": { "gmail-calendar": {
     "command": "uv",
@@ -54,34 +81,53 @@ Notes from doing it on Windows/PowerShell:
     "env": { "GOOGLE_PRIVATE_DIR": "C:\\path\\to\\private-folder" } } } }
 ```
 
-## Prompts we used (in English, as required)
-1. Step 4 – build: *Build an MCP server in Python in the current folder, named "gmail-calendar".
-   Use the official MCP Python SDK (FastMCP), run it with uv, and use the stdio transport … Expose
-   exactly these tools … There must be NO tool that sends or deletes anything. Time zone:
-   Asia/Jerusalem …* (full text in the lesson deck, step 4)
-2. Step 6 – self-test: *Write and run a small test script, test_server.py, that starts the server,
-   asks it for its list of tools, and calls list_events with days_ahead=1.*
-3. Step 7 – register: *Register this server in Claude Code with "claude mcp add": local scope,
-   name "gmail-calendar", stdio transport, GOOGLE_PRIVATE_DIR, command "uv run --directory <folder> server.py".*
-4. Step 8: *What do I have in my calendar tomorrow?*
-5. Step 9: *Write a Gmail draft to myself with the subject "L06 test" and add a calendar event for
-   today, 4 hours from now, called "MCP works".*
-6. Step 10: *Find a free hour tomorrow between 09:00 and 17:00 and add an event called "Study group" there.*
-7. Step 11: *Great. Now send the "L06 test" draft.* / *Delete the "Study group" event.*
-8. Step 13 ⭐: *Act as my meeting coordinator. Find the latest meeting request in my email … Never send anything.*
+<div dir="rtl">
 
-**Full prompt log** – every prompt (ours to the coding agent, and the lesson prompts), in order,
-with what the agent did and the result: [PROMPTS.md](PROMPTS.md).
-The checks are summarised in [reflection.md](reflection.md).
+## תרחישים וראיות
 
-## Screenshots
-Personal details (Windows user name in a path, one unrelated private email draft) are blacked out.
+- **שלב 8 — יומן למחר.** לפי היומן, הסוכן השתמש ב־`list_events` ודיווח שאין אירוע למחר.
+- **שלב 9 — טיוטה ואירוע.** בשעה 16:04 התבקש הסוכן לשמור טיוטה לעצמו ולהוסיף אירוע בעוד ארבע שעות. הטיוטה **L06 test** והאירוע **MCP works** בשעות 20:04–21:04 מופיעים בצילומים.
+- **שלב 10 — מפגש לימודים.** לפי התיעוד, הסוכן בחר חלון ב־09:00–10:00 וקבע את **Study group**.
+- **שלב 11 — בדיקת הרשאות.** התבקשו שליחה ומחיקה. לפי היומן, ניסיון המחיקה דרך מחבר אחר נעצר בבקשת הרשאה, והטיוטה והאירוע נשארו במקומם.
+- **שלב 13 — תיאום פגישה.** הסוכן התבקש לחפש בקשה במייל, לקרוא אותה ולבדוק זמינות. אילו המועד פנוי, עליו לקבוע אירוע ולהכין טיוטת אישור. במקרה של התנגשות עליו להציע שני מועדים בטיוטה. בפועל נבחר מייל אמיתי, ולפי היומן הסוכן מצא רשומות קיימות ושמר טיוטה בלבד. שני הענפים המתוכננים לא הודגמו במלואם.
 
-| `/mcp` – server connected | Step 9 result – Gmail Drafts | Step 9 result – Calendar |
-|---|---|---|
-| ![/mcp shows gmail-calendar connected with 6 tools](screenshots/01_mcp_connected.png) | ![Draft "L06 test" in Gmail Drafts, not sent](screenshots/02_gmail_drafts.png) | ![Event "MCP works" 20:04–21:04, four hours after the request](screenshots/03_calendar_events.png) |
+### צילומי מסך מההרצה המקורית
 
-## Files
-`server.py` (the 6 tools) · `google_auth.py` (loads the token) · `test_server.py` (self-test) ·
-`pyproject.toml` / `uv.lock` (dependencies: `mcp[cli]<2`, Google API client, `tzdata`) ·
-`reflection.md` · `.gitignore`
+![חיבור שרת MCP ושישה כלים ב־Claude Code](screenshots/01_mcp_connected.png)
+
+Claude Code מציג שרת מקומי מחובר ושישה כלים.
+
+![תיקיית הטיוטות ובה L06 test](screenshots/02_gmail_drafts.png)
+
+הטיוטה **L06 test** נשמרה ב־Gmail. טיוטה פרטית אחרת הושחרה בצילום המקורי.
+
+![אירוע MCP works בשעות 20:04 עד 21:04](screenshots/03_calendar_events.png)
+
+האירוע **MCP works** מופיע ביומן ארבע שעות לאחר זמן הבקשה המתועד.
+
+## הרשאות ומגבלות
+
+השרת אינו חושף כלי שליחה, העברה, מחיקה או עריכת אירוע. המשתמש בודק ושולח טיוטות בעצמו. תיאור `read_email` מנחה את המודל להתייחס לתוכן המייל כנתונים. זו שכבת הנחיה מול Prompt Injection. הרשאות OAuth המוצהרות (`gmail.modify` ו־`calendar`), רשימת כלי השרת ומדיניות המארח הן שכבות נפרדות. ההרשאות האפקטיביות בחשבון ובמארח לא אומתו במסגרת סקירת התיעוד.
+
+בדיקת זמינות והוספה ליומן הן פעולות נפרדות. השרת אינו אוכף מניעת כפילויות או חפיפות. בהרצה המתועדת היעדר חלונות ביום שנראה פנוי הוסבר על ידי תשובת `freebusy`. תרחישי בדיקה מבוקרים, למשל מייל סינתטי לתיאום, יסייעו לבדוק כל ענף בנפרד.
+
+## מבנה המאגר
+
+| נתיב | תוכן |
+|---|---|
+| [README.md](README.md) | נקודת כניסה, הוראות וראיות |
+| [PRD.md](PRD.md) | דרישות, קריטריוני קבלה, עקיבות וסיכונים |
+| [reflection.md](reflection.md) | ארבע תשובות הרפלקציה ונספח ראיות |
+| [PROMPTS.md](PROMPTS.md) | הפרומפטים המקוריים, לרבות שלבי בנייה, בדיקה ורישום, ויומן Codex |
+| [prompts/](prompts/) | שני פרומפטי Codex כפי שהופיעו בשיחה |
+| [COLLABORATION.md](COLLABORATION.md) | חלוקת העבודה ותהליך GitHub |
+| [CLAUDE.md](CLAUDE.md) | כללי עבודה למימוש המקורי |
+| [server.py](server.py), [google_auth.py](google_auth.py), [test_server.py](test_server.py) | שרת, אימות ובדיקת עשן |
+| [pyproject.toml](pyproject.toml), [uv.lock](uv.lock), [.gitignore](.gitignore) | תלויות והחרגות |
+| [screenshots/](screenshots/) | צילומי ההרצה המקוריים |
+
+## שיתוף פעולה ושימוש ב־AI
+
+לבנת הובילה את המימוש והגדרת החיבור ל־Google, הריצה את תרחישי המטלה ואספה ראיות בסיוע Claude Code. ליאת הובילה את הרפלקציה, הדרישות וביקורת התיעוד בסיוע Codex ואישרה את נוסח התשובות. עבודת התיעוד נסמכה על הקוד, צילומי המסך ותיעוד ההרצות של לבנת. היא לא כללה הרצה חוזרת מול Google.
+
+</div>

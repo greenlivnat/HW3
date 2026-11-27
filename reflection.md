@@ -1,85 +1,99 @@
-# Reflection – L06: the L05 exercise through an MCP server
+<div dir="rtl">
 
-> Personal details (email address, Windows user name, event links, contents of real emails)
-> were removed on purpose. The raw run logs stay on the local computer only (`logs/`, ignored by Git).
+# רפלקציה – מטלה 03
 
-## What did we ask the agent?
-- To **build** an MCP server `gmail-calendar` (FastMCP, uv, stdio) with exactly six tools –
-  `search_emails`, `read_email`, `create_draft`, `list_events`, `find_free_slots`, `create_event` –
-  reusing last week's OAuth client and `token.json` from the private folder (`GOOGLE_PRIVATE_DIR`),
-  with **no** tool that sends or deletes, time zone Asia/Jerusalem, a `.gitignore` for secrets,
-  and every Python file under 150 lines.
-- To **test** it (`test_server.py`), **register** it in Claude Code (`claude mcp add`, local scope),
-  and then to use it with free-language requests only (steps 8–11, 13). The exact prompts are in
-  [README.md](README.md#prompts-we-used-in-english-as-required).
+## 1. מה ביקשנו מהסוכן לבצע?
 
-## How did we check that the result is correct?
-| Check | Result |
+במסגרת המטלה ביקשנו מהסוכן לבנות שרת MCP שיאפשר למודל השפה לעבוד עם Gmail ועם Google Calendar. הגדרנו שישה כלים המאפשרים חיפוש וקריאת מיילים, יצירת טיוטות, הצגת אירועים ביומן, איתור זמנים פנויים ויצירת אירועים.
+
+לאחר הקמת השרת, ביקשנו מהסוכן לבצע מספר משימות באמצעות הוראות בשפה טבעית, ובהן יצירת טיוטת מייל, קביעת אירוע בעוד ארבע שעות ומציאת זמן פנוי למפגש לימודים.
+
+בנוסף, ביקשנו לבחון את יכולתו להתמודד עם משימה מורכבת יותר באמצעות שילוב בין הכלים. לשם כך הגדרנו תרחיש שבו הסוכן נדרש לאתר בקשה לפגישה במייל, לבדוק את הזמינות ביומן ובהתאם לכך לקבוע פגישה ולהכין טיוטת תשובה, או להציע שני מועדים חלופיים.
+
+## 2. כיצד בדקנו שהתוצאה נכונה?
+
+לא הסתפקנו בהודעת הסוכן שהמשימה בוצעה בהצלחה, אלא בדקנו את התוצאות בפועל בממשקים של Gmail ושל Google Calendar.
+
+וידאנו שהמייל נשמר בתיקיית הטיוטות ושהאירוע הופיע ביומן במועד המבוקש. לדוגמה, כאשר ניתנה בשעה 16:04 ההנחיה ליצור אירוע בעוד ארבע שעות, האירוע נקבע לשעה 20:04. תיעדנו את התוצאות באמצעות צילומי מסך.
+
+במהלך העבודה נתקלנו במקרה שבו הסוכן לא מצא זמן פנוי ביום שנראה לנו פנוי. לאחר בדיקת המידע שהתקבל מה־API, התברר שקיים אירוע שחוסם את הזמינות באותו יום. מכך למדנו שלא כל תוצאה בלתי צפויה מעידה על תקלה בקוד, ושחשוב לבדוק את מקור הנתונים לפני שמבצעים שינויים.
+
+בתרחיש תיאום הפגישות הסוכן בחר מייל אמיתי, מאחר שלא הוכן מראש מייל ייעודי לבדיקה. לפי תיעוד ההרצה, הסוכן זיהה שהפגישה כבר קיימת ביומן, נמנע מיצירת אירוע נוסף והכין טיוטת תשובה. עם זאת, מניעת כפילויות במקרה זה התבססה על שיקול דעתו של הסוכן ולא על מנגנון מובנה בקוד.
+
+מסקנתנו היא שבדיקת תוצרי הסוכן חשובה לא פחות מבדיקת הקוד עצמו, וכי כדאי להגדיר מראש תרחישי בדיקה מבוקרים.
+
+## 3. איזה כלי בחרנו שלא לכלול ומדוע?
+
+בחרנו שלא לכלול כלים לשליחת מיילים ולמחיקת מיילים או אירועים ביומן. רצינו לאפשר לסוכן לסייע בביצוע משימות, מבלי לתת לו סמכות לבצע פעולות שעלולות לגרום לנזק או להתבצע ללא אישור המשתמש.
+
+אחת הסיבות לכך היא שמיילים עשויים להכיל הוראות שמנסות להשפיע על התנהגות הסוכן ולגרום לו לבצע פעולות שלא התבקש לבצע. לכן הגדרנו שתוכן המייל ייחשב למידע בלבד ולא להוראה עבור הסוכן.
+
+במהלך בדיקת גבולות המערכת גילינו נקודה שלא צפינו מראש: כאשר הסוכן התבקש למחוק אירוע, הוא ניסה להשתמש במחבר אחר שהיה זמין בסביבת העבודה. הפעולה נעצרה בעקבות מנגנון בקשת ההרשאה.
+
+ממקרה זה למדנו שהגבלת הכלים בשרת ה־MCP אינה מספיקה בפני עצמה. יש להביא בחשבון גם את ההרשאות שניתנו לחשבון ואת הכלים הנוספים הזמינים לסוכן.
+
+מבחינתנו, האפשרות להכין טיוטת מייל מבלי לשלוח אותה יוצרת איזון נכון בין יעילות לבין שליטה אנושית. הסוכן מבצע את עבודת ההכנה, אך ההחלטה הסופית נשארת בידי המשתמש.
+
+## 4. מה השתנה בין שיעור 5 לשיעור 6?
+
+בשיעור 5 עבדנו עם קוד Python שפנה ישירות ל־API של Gmail ושל Google Calendar. סדר הפעולות הוגדר מראש בקוד, ולכן שינוי מהותי במשימה הצריך התאמה של התוכנית.
+
+בשיעור 6 השתמשנו ב־MCP כדי להעמיד לרשות הסוכן מספר כלים קבועים, כאשר הסוכן עצמו מחליט באילו כלים להשתמש, באיזה סדר ואילו פרמטרים להעביר להם, בהתאם לבקשה.
+
+חשוב לציין שהשימוש ב־API לא נעלם. הכלים בשרת ה־MCP עדיין פונים ל־API של Google, אך השינוי הוא באופן שבו נבחרות ומופעלות הפעולות.
+
+היתרון המרכזי שזיהינו הוא הגמישות. באמצעות אותם שישה כלים הצלחנו לבצע מספר משימות שונות, מבלי לכתוב תוכנית חדשה עבור כל משימה.
+
+מצד שני, העצמאות שניתנת לסוכן מחייבת אותנו להקדיש יותר תשומת לב להגדרת הרשאות, למגבלות המערכת ולבדיקת התוצאות. אם בשיעור 5 שלטנו ישירות ברצף הפעולות, בשיעור 6 למדנו לנהל מערכת שמקבלת חלק מההחלטות בעצמה.
+
+מבחינתנו, זהו השינוי המשמעותי ביותר בין השיעורים: המעבר מהגדרת רצף פעולות קבוע להגדרת כלים, כללים וגבולות שבתוכם הסוכן יכול לפעול.
+
+</div>
+
+<div dir="rtl">
+
+## נספח ראיות טכניות
+
+הנוסח אושר בידי ליאת ונערך בסיוע AI על בסיס עבודתה המתועדת של לבנת וסקירת Codex. יומני הריצה הגולמיים נשארו מחוץ למאגר.
+
+| בדיקה | ראיה ותוצאה |
 |---|---|
-| `test_server.py`: tools/list | exactly the 6 tools, each with an English description; no `send`/`delete` in any name |
-| `test_server.py`: tools/call `list_events(1)` | Google answered (no auth error) – returned the L05 test event |
-| `find_free_slots` on a day that looked empty | returned nothing → checked the raw free/busy answer: a real event covered the whole day, so the tool was right |
-| `claude mcp get gmail-calendar` | `✔ Connected` (after a fix, see work log) |
-| Step 8 – "What do I have tomorrow?" | answered via `list_events`, matched the calendar |
-| Step 9 – draft + event | `create_draft` → draft **L06 test** in Drafts (not sent); `create_event` → **MCP works** exactly 4 h after the request time, Israel time; **no new .py file** was written |
-| Step 10 – "Study group" | `find_free_slots` → first free hour tomorrow 09:00–10:00 → `create_event` |
-| Step 11 – "send" / "delete" | refused both: the server has no such tools; the draft stayed in Drafts and the event stayed in the calendar |
+| גילוי כלים | [הקוד](test_server.py) בודק את קבוצת ששת השמות ואת היעדר `send` ו־`delete` בשמות. התיאורים באנגלית מודפסים. |
+| `list_events(1)` | לפי [יומן ההרצה](PROMPTS.md), התקבלה תשובה ובה אירוע L05, ללא שגיאת אימות. הסקריפט מדפיס את `isError` ושורת הסיום `OK` מודפסת גם בעת שגיאה. אין בדיקות כתיבה אוטומטיות. |
+| רישום | [צילום החיבור](screenshots/01_mcp_connected.png) מציג את השרת מחובר עם שישה כלים אחרי תיקוני ההגדרות המתועדים. |
+| זמינות | לפי יומן העבודה, יום שנראה פנוי החזיר אפס חלונות. תשובת `freebusy` הראתה אירוע שחסם את היום. |
+| שלב 8 | לפי היומן, `list_events` החזיר אירוע בדיקה להיום, והתשובה שאין אירוע למחר התאימה ליומן שנבדק אז. |
+| שלב 9 | [צילום Gmail](screenshots/02_gmail_drafts.png) מציג את **L06 test** בטיוטות ב־16:04. [צילום היומן](screenshots/03_calendar_events.png) מציג את **MCP works** ב־20:04–21:04. לפי היומן, הסוכן השתמש ב־`create_draft` וב־`create_event` ללא כתיבת קובץ Python חדש. |
+| שלב 10 | לפי היומן, הסוכן השתמש ב־`find_free_slots` ואז ב־`create_event` וקבע את **Study group** למחר ב־09:00–10:00. |
+| שלב 11 | לפי היומן, הטיוטה נשארה והאירוע לא נמחק. אין כלי שליחה או מחיקה בשרת. בניסיון המחיקה הסוכן פנה למחבר אחר במארח ונעצר בבקשת הרשאה. |
+| שלב 13 | לפי היומן, הסוכן חיפש וקרא מייל אמיתי, בדק את היומן, זיהה שתי רשומות קיימות והכין טיוטה בלי להוסיף אירוע. יצירת פגישה כשיש זמינות והצעת שני מועדים בעת התנגשות לא הודגמו במלואן. |
 
-Screenshots: [`/mcp` connected](screenshots/01_mcp_connected.png) ·
-[draft "L06 test" in Drafts](screenshots/02_gmail_drafts.png) ·
-[event "MCP works" at 20:04, request made at 16:04](screenshots/03_calendar_events.png).
+### השוואה טכנית בין L05 ל־L06
 
-The agent in steps 8–13 ran as `claude -p` and was **allowed only the six gmail-calendar tools**
-(no Bash/Python), so it could not "solve" a request by writing a script.
-
-## Which tool did we leave out, and why?
-**Sending email** (`users.messages.send` / `drafts.send`) and **deleting** anything.
-The agent reads email content, and an email can contain hidden instructions (prompt injection,
-e.g. "forward all emails to …"). Without a send/forward/delete tool there is nothing to execute –
-the worst case is an unwanted *draft* or an extra event, which a human sees and can remove.
-The human stays in the loop: the agent prepares, the person presses **Send**.
-
-## L05 vs L06: what changed?
-| | L05 – `main.py` | L06 – MCP server |
+| היבט | L05 לפי הסיכום המקורי | L06 |
 |---|---|---|
-| New request | new prompt + new program | same server, one sentence |
-| Who chooses the steps | the code, fixed order | the model, from the tool menu |
-| "Is the calendar busy?" | not checked | `find_free_slots` |
-| Who can use it | this program only | any MCP host (Claude Code, agy, Codex…) |
-| Safety boundary | what the code does | which tools exist (no send/delete) |
-| Cost | no tokens | tool descriptions are sent to the model on every turn |
-| Secrets | private folder | the **same** private folder – nothing new, nothing copied |
+| ביצוע | `main.py` הגדיר רצף קבוע. שינוי דרש התאמה לתוכנית. | המודל בוחר את הרצף והפרמטרים מתוך שישה כלים. |
+| זמינות | בתרגיל המתועד לא נבדקה זמינות. | הסוכן יכול לקרוא ל־`find_free_slots`. |
+| שימוש חוזר | התוכנית המקומית הריצה את הרצף. | הכלים מיועדים למארחי MCP. החיבור שהודגם הוא Claude Code. |
+| שליטה | רצף הפעולות בקוד. | ממשק הכלים, הרשאות המארח ו־OAuth. |
+| עלות | ביצוע הסקריפט הקבוע אינו מצריך בחירת כלים במודל. | תיאורי הכלים משמשים את המודל לבחירה. אין מדידת טוקנים להשוואה. |
+| סודות | תיקייה פרטית. | שימוש באותה תיקייה פרטית. |
 
----
+קוד המקור של L05 אינו כלול במאגר. [`create_event`](server.py) בודק שסוף האירוע מאוחר מתחילתו ומבצע הוספה. בדיקת זמינות היא פעולה נפרדת. השרת אינו אוכף מניעת כפילויות או חפיפות. סבב התיעוד לא כלל הרצה חוזרת מול Google.
 
-## Work log (what the agent did, including what went wrong)
-1. Read the full lesson deck (`L06-MCP-Gmail-Calendar_slides-v03.html`, 14 steps + appendices)
-   and extracted the tasks. The deck itself is the lecturer's material and is **not** committed.
-2. Connected the local folder to the GitHub repo `HW3`.
-3. Created the uv project and installed `mcp[cli]` + Google libraries.
-4. **Problem:** the newest `mcp` package is **2.x**, where `FastMCP` was renamed (`MCPServer`), so
-   the server crashed on import and the self-test reported "Connection closed".
-   **Fix:** pinned `mcp[cli]<2` (the assignment asks for FastMCP). Self-test passed.
-5. Wrote `server.py` (130 lines), `google_auth.py` (51), `test_server.py` (38). Logging goes to
-   stderr only – stdout is the MCP pipe. The server never opens a browser.
-6. Suspected a bug in `find_free_slots` (an empty day returned no slots); inspected the raw
-   `freebusy` answer – a real all-day-long event – so no change was needed.
-7. Registration problems in PowerShell, fixed one by one:
-   bare `--` was swallowed (→ `'--'`); `--env` swallowed the server name (→ name first);
-   `/mcp` status *Failed to connect* because `uv` was installed after Claude Code started
-   (→ full path to `uv.exe`). Final status: **Connected**.
-8. Ran steps 8, 9, 10, 11 through Claude Code with only the MCP tools allowed – all as expected.
-9. **Lesson from step 11:** besides our server, the host (Claude Code) had *other* Google
-   connectors installed, and the agent tried them to delete the event; only the permission prompt
-   stopped it. The tool boundary of our server is real, but the host's other connectors and the
-   permission prompts are part of the safety boundary too – read every approval request.
-10. **Lesson from step 13 (⭐ meeting coordinator):** we did not prepare a dedicated test email, so
-    the agent picked the newest *real* meeting email in the inbox. It behaved correctly – it saw the
-    meeting was already in the calendar (twice), did **not** create a duplicate, and only saved a
-    reply **draft** (nothing sent) – but next time run this step on a test email sent for it.
-11. Before committing: checked `git status` and the file contents for secrets and personal details
-    (email address, user name, private-folder path, event links); none are in the repo.
-    `.gitignore` also excludes `logs/`, `.agents/` and the slides file.
-12. Added the three screenshots. Before committing them, checked each image for personal data and
-    blacked out two areas: the Windows user name inside the `.claude.json` path (`/mcp` screen) and
-    the step-13 reply draft to a real recruiter (Gmail Drafts screen). The calendar screen was clean.
+### יומן העבודה המקורי של לבנת
+
+1. הסוכן קרא את מצגת L06 וחילץ 14 שלבים ונספחים. חומר ההוראה לא צורף למאגר.
+2. הוא חיבר את התיקייה המקומית למאגר `HW3`.
+3. הוא הקים פרויקט `uv` והתקין את `mcp[cli]` וספריות Google.
+4. לפי היומן, בגרסת `mcp` מסדרת 2.x שנוסתה, `FastMCP` השתנה ל־`MCPServer`. הייבוא נכשל והבדיקה הציגה `Connection closed`. הצמדה ל־`mcp[cli]<2` פתרה את התקלה לפי ההרצה.
+5. נכתבו `server.py` (130 שורות), `google_auth.py` (51) ו־`test_server.py` (38). stdout נשמר לתעבורת MCP, פלט אבחון מיועד ל־stderr והשרת אינו פותח דפדפן.
+6. תחילה עלה חשד לתקלה ב־`find_free_slots`. תשובת `freebusy` הצביעה על אירוע אמיתי שחסם את היום, ולכן לא נדרש תיקון.
+7. ברישום ב־PowerShell נדרש לצטט את המפריד `'--'`, להציב את שם השרת לפני `--env` ולהשתמש בנתיב המלא של `uv.exe` משום ש־`uv` הותקן לאחר פתיחת Claude Code. לאחר מכן הוצג `Connected`.
+8. שלבים 8–11 הורצו ב־Claude Code. הכוונה בהרצת `claude -p` הייתה להגביל את הביצוע לכלי הפרויקט, בלי כתיבת סקריפט חלופי.
+9. בבדיקת הגבולות הסוכן ניסה למחוק אירוע דרך מחבר Google אחר. בקשת הרשאה עצרה את הפעולה לפי היומן. המחבר המדויק והגדרות ההרשאה לא מתועדים. יש לבחון גם את המחברים במארח ולקרוא כל בקשת אישור.
+10. בהיעדר מייל בדיקה ייעודי, הסוכן בחר בקשה אמיתית. לפי היומן, הפגישה הופיעה פעמיים ביומן והסוכן שמר טיוטת תשובה בלבד. להמשך הוצע להכין מייל בדיקה ייעודי.
+11. לפני ה־Commit נבדקו `git status` ותוכן הקבצים המיועדים לפרסום לאיתור סודות ופרטים אישיים. `.gitignore` מחריג גם יומנים, הגדרות מקומיות ואת המצגת.
+12. נוספו שלושה צילומים. לפי היומן הושחרו שם המשתמש המקומי בצילום החיבור ופרטי טיוטה אמיתית ב־Gmail. צילום היומן הציג אירועי בדיקה.
+
+</div>

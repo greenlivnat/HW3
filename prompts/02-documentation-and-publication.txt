@@ -1,0 +1,1313 @@
+# ASSIGNMENT 03 — FINAL DOCUMENTATION, REFLECTION AND COLLABORATIVE GITHUB PUBLICATION
+
+## 1. Project context
+
+You are completing Assignment 03 of the Generative AI course at Bar-Ilan University.
+
+- Assignment: 03 — MCP Gmail and Google Calendar
+- Group ID: LIATLVNT
+- Students: Liat Kafezider and Livnat Benson
+- Repository: https://github.com/greenlivnat/HW3
+- Local directory: `D:\HW3`
+- Repository owner: `greenlivnat`
+- Contributor: `liatkaf`
+- Git author: Liat Kafezider
+- Personal working branch: `liat/assignment03-reflection-documentation`
+- Target branch: `main`
+
+Livnat has already developed the MCP server, configured the Google integration, executed the assignment scenarios, collected screenshots, and documented the initial implementation using Claude Code.
+
+Liat has already cloned the repository, created her personal working branch, and instructed Codex to perform a read-only repository review. That review has been completed in this session.
+
+Liat's contribution is focused on reflection, requirements engineering, documentation quality, critical analysis, and collaborative GitHub publication.
+
+Use the findings from your immediately preceding repository analysis as the factual foundation for this task.
+
+Do not repeat the implementation or live Google experiments.
+
+## 2. Execution rules
+
+Complete the entire task autonomously.
+
+- Do not ask questions.
+- Do not request conversational approval.
+- Do not stop after presenting a plan.
+- Do not repeat the previous repository analysis unnecessarily.
+- Do not install software or dependencies.
+- Do not modify the working MCP server.
+- Do not modify Python source files, tests, authentication code, dependency files, or runtime configurations.
+- Do not access Gmail or Google Calendar.
+- Do not create, send, edit, forward, or delete emails.
+- Do not create, edit, or delete calendar events.
+- Do not access private credentials or authentication tokens.
+- Do not overwrite Livnat's original contribution.
+- Do not fabricate test results, screenshots, tool calls, student activities, or Git history.
+- Respect system-enforced security and permission requests.
+
+All new explanatory project documentation must be written in natural, professional Hebrew.
+
+Preserve English technical terminology, commands, function names, filenames, code examples, URLs, and original prompts where appropriate.
+
+Ensure correct RTL rendering and readability of mixed Hebrew-English content on GitHub.
+
+## 3. Preserve the baseline
+
+Before modifying files:
+
+1. Verify the current repository and remote origin.
+2. Verify the active personal branch.
+3. Verify Git author identity.
+4. Record the actual baseline commit hash.
+5. Inspect the working tree.
+6. Verify that the branch is based on the intended shared project.
+7. Fetch remote metadata using the supported permission mechanism if required.
+8. Check whether upstream changes or unrelated local modifications exist.
+
+Do not discard, overwrite, or silently incorporate unrelated changes.
+
+Preserve all original implementation files and existing screenshots.
+
+The intended modification scope is documentation only.
+
+## 4. Complete reflection.md
+
+The lecturer requires answers to four reflection questions. The students are responsible for the answers, while the agent assists with structure and repository integration.
+
+The following Hebrew text has been reviewed and approved by Liat for integration into the project documentation. It was developed with AI-assisted editing based on Livnat's documented implementation and Liat's review of the Codex findings.
+
+Preserve this text without substantive rewriting. Do not invent additional personal experiences or present AI-assisted drafting as unaided student authorship.
+
+Retain the original supporting check tables, screenshots, technical work log, setup incidents, and other factual evidence from Livnat's existing reflection. Translate their explanatory content into Hebrew where necessary.
+
+Clearly separate the four reflection answers from the supporting technical evidence.
+
+### Approved reflection text
+
+# רפלקציה – מטלה 03
+
+## 1. מה ביקשנו מהסוכן לבצע?
+
+במסגרת המטלה ביקשנו מהסוכן לבנות שרת MCP שיאפשר למודל השפה לעבוד עם Gmail ועם Google Calendar. הגדרנו שישה כלים המאפשרים חיפוש וקריאת מיילים, יצירת טיוטות, הצגת אירועים ביומן, איתור זמנים פנויים ויצירת אירועים.
+
+לאחר הקמת השרת, ביקשנו מהסוכן לבצע מספר משימות באמצעות הוראות בשפה טבעית, ובהן יצירת טיוטת מייל, קביעת אירוע בעוד ארבע שעות ומציאת זמן פנוי למפגש לימודים.
+
+בנוסף, ביקשנו לבחון את יכולתו להתמודד עם משימה מורכבת יותר באמצעות שילוב בין הכלים. לשם כך הגדרנו תרחיש שבו הסוכן נדרש לאתר בקשה לפגישה במייל, לבדוק את הזמינות ביומן ובהתאם לכך לקבוע פגישה ולהכין טיוטת תשובה, או להציע שני מועדים חלופיים.
+
+## 2. כיצד בדקנו שהתוצאה נכונה?
+
+לא הסתפקנו בהודעת הסוכן שהמשימה בוצעה בהצלחה, אלא בדקנו את התוצאות בפועל בממשקים של Gmail ושל Google Calendar.
+
+וידאנו שהמייל נשמר בתיקיית הטיוטות ושהאירוע הופיע ביומן במועד המבוקש. לדוגמה, כאשר ניתנה בשעה 16:04 ההנחיה ליצור אירוע בעוד ארבע שעות, האירוע נקבע לשעה 20:04. תיעדנו את התוצאות באמצעות צילומי מסך.
+
+במהלך העבודה נתקלנו במקרה שבו הסוכן לא מצא זמן פנוי ביום שנראה לנו פנוי. לאחר בדיקת המידע שהתקבל מה־API, התברר שקיים אירוע שחוסם את הזמינות באותו יום. מכך למדנו שלא כל תוצאה בלתי צפויה מעידה על תקלה בקוד, ושחשוב לבדוק את מקור הנתונים לפני שמבצעים שינויים.
+
+בתרחיש תיאום הפגישות הסוכן בחר מייל אמיתי, מאחר שלא הוכן מראש מייל ייעודי לבדיקה. לפי תיעוד ההרצה, הסוכן זיהה שהפגישה כבר קיימת ביומן, נמנע מיצירת אירוע נוסף והכין טיוטת תשובה. עם זאת, מניעת כפילויות במקרה זה התבססה על שיקול דעתו של הסוכן ולא על מנגנון מובנה בקוד.
+
+מסקנתנו היא שבדיקת תוצרי הסוכן חשובה לא פחות מבדיקת הקוד עצמו, וכי כדאי להגדיר מראש תרחישי בדיקה מבוקרים.
+
+## 3. איזה כלי בחרנו שלא לכלול ומדוע?
+
+בחרנו שלא לכלול כלים לשליחת מיילים ולמחיקת מיילים או אירועים ביומן. רצינו לאפשר לסוכן לסייע בביצוע משימות, מבלי לתת לו סמכות לבצע פעולות שעלולות לגרום לנזק או להתבצע ללא אישור המשתמש.
+
+אחת הסיבות לכך היא שמיילים עשויים להכיל הוראות שמנסות להשפיע על התנהגות הסוכן ולגרום לו לבצע פעולות שלא התבקש לבצע. לכן הגדרנו שתוכן המייל ייחשב למידע בלבד ולא להוראה עבור הסוכן.
+
+במהלך בדיקת גבולות המערכת גילינו נקודה שלא צפינו מראש: כאשר הסוכן התבקש למחוק אירוע, הוא ניסה להשתמש במחבר אחר שהיה זמין בסביבת העבודה. הפעולה נעצרה בעקבות מנגנון בקשת ההרשאה.
+
+ממקרה זה למדנו שהגבלת הכלים בשרת ה־MCP אינה מספיקה בפני עצמה. יש להביא בחשבון גם את ההרשאות שניתנו לחשבון ואת הכלים הנוספים הזמינים לסוכן.
+
+מבחינתנו, האפשרות להכין טיוטת מייל מבלי לשלוח אותה יוצרת איזון נכון בין יעילות לבין שליטה אנושית. הסוכן מבצע את עבודת ההכנה, אך ההחלטה הסופית נשארת בידי המשתמש.
+
+## 4. מה השתנה בין שיעור 5 לשיעור 6?
+
+בשיעור 5 עבדנו עם קוד Python שפנה ישירות ל־API של Gmail ושל Google Calendar. סדר הפעולות הוגדר מראש בקוד, ולכן שינוי מהותי במשימה הצריך התאמה של התוכנית.
+
+בשיעור 6 השתמשנו ב־MCP כדי להעמיד לרשות הסוכן מספר כלים קבועים, כאשר הסוכן עצמו מחליט באילו כלים להשתמש, באיזה סדר ואילו פרמטרים להעביר להם, בהתאם לבקשה.
+
+חשוב לציין שהשימוש ב־API לא נעלם. הכלים בשרת ה־MCP עדיין פונים ל־API של Google, אך השינוי הוא באופן שבו נבחרות ומופעלות הפעולות.
+
+היתרון המרכזי שזיהינו הוא הגמישות. באמצעות אותם שישה כלים הצלחנו לבצע מספר משימות שונות, מבלי לכתוב תוכנית חדשה עבור כל משימה.
+
+מצד שני, העצמאות שניתנת לסוכן מחייבת אותנו להקדיש יותר תשומת לב להגדרת הרשאות, למגבלות המערכת ולבדיקת התוצאות. אם בשיעור 5 שלטנו ישירות ברצף הפעולות, בשיעור 6 למדנו לנהל מערכת שמקבלת חלק מההחלטות בעצמה.
+
+מבחינתנו, זהו השינוי המשמעותי ביותר בין השיעורים: המעבר מהגדרת רצף פעולות קבוע להגדרת כלים, כללים וגבולות שבתוכם הסוכן יכול לפעול.
+
+### End of approved reflection text
+
+After integrating the reflection:
+
+- Preserve and translate Livnat's supporting work log.
+- Update the existing verification table.
+- Include the documented meeting-coordinator outcome.
+- Correct the description of the permission-boundary experiment.
+- Distinguish screenshots, source-code findings, and reported execution outcomes.
+- Document the limitations of the self-test.
+- Document the absence of server-side duplicate prevention.
+- Do not claim that all meeting-coordinator branches were successfully tested.
+- Do not claim that token consumption was measured.
+- Identify the L05 comparison as based on the documented retrospective where the original L05 source is unavailable.
+
+## 5. Create PRD.md
+
+Create a complete, standalone Product Requirements Document in Hebrew at the repository root.
+
+The PRD must accurately represent the implemented system rather than an imaginary expanded product.
+
+Use the following structure:
+
+### 5.1 Project identification
+
+- Project name.
+- Assignment number.
+- Group ID.
+- Contributors.
+- Document purpose.
+- Current project status.
+
+### 5.2 Background and objectives
+
+Explain the educational purpose of connecting an LLM to external tools.
+
+Explain the transition from fixed API workflows in L05 to reusable MCP tools in L06.
+
+### 5.3 Scope
+
+Define implemented capabilities and explicitly excluded capabilities.
+
+Distinguish the project MCP server's scope from the capabilities of the surrounding AI host.
+
+### 5.4 Functional requirements
+
+Create uniquely identified functional requirements for all six implemented MCP tools:
+
+- `search_emails`
+- `read_email`
+- `create_draft`
+- `list_events`
+- `find_free_slots`
+- `create_event`
+
+Inspect the actual implementation for signatures, parameter names, default values, validation, and behavior.
+
+Include the Gmail profile lookup used when the draft recipient is specified as `me`.
+
+Include the optional `day_start` and `day_end` parameters of `find_free_slots`.
+
+Do not invent functionality.
+
+### 5.5 Non-functional requirements
+
+Cover:
+
+- Privacy.
+- Credential protection.
+- Security.
+- Human supervision.
+- Usability.
+- Maintainability.
+- Reusability.
+- Error reporting.
+- Time-zone consistency.
+- Separation between information and instructions contained in emails.
+
+Distinguish current implementation from desired future guarantees.
+
+### 5.6 System architecture
+
+Describe:
+
+- Natural-language user request.
+- Claude Code as the demonstrated runtime host.
+- MCP protocol.
+- FastMCP server.
+- Python functions.
+- OAuth authentication.
+- Gmail API.
+- Google Calendar API.
+- stdio transport and uv execution.
+
+Document other host configurations as examples only unless execution evidence exists.
+
+### 5.7 Use cases
+
+Include:
+
+- Listing calendar events.
+- Creating a Gmail draft.
+- Creating a calendar event at a requested relative time.
+- Finding availability for a study meeting.
+- Coordinating a meeting from an email request.
+- Handling an existing meeting.
+- Handling unavailable time.
+- Challenging the system's permission boundaries.
+
+Distinguish requested behavior from demonstrated outcomes.
+
+### 5.8 Acceptance criteria
+
+Define clear and measurable acceptance criteria for each core requirement.
+
+Include a traceability matrix containing:
+
+- Requirement ID.
+- Requirement description.
+- Acceptance criterion.
+- Evidence source.
+- Verification status.
+- Known limitation.
+
+Use accurate evidence classifications:
+
+- Implemented in source code.
+- Corroborated by screenshots.
+- Reported in the original execution log.
+- Partially verified.
+- Not verified.
+- Future improvement.
+
+Do not mark an acceptance criterion as passed without supporting evidence.
+
+### 5.9 Risk assessment
+
+Include a concise risk table covering:
+
+- Prompt injection through email content.
+- Unauthorized email sending.
+- Unauthorized deletion.
+- Alternate host connectors.
+- Broad OAuth authorization scopes.
+- Unwanted drafts or events.
+- Duplicate calendar events.
+- Overlapping events.
+- Availability changing between checking and event creation.
+- Accidental disclosure of credentials.
+- Use of real inbox content during testing.
+- False-positive self-test results.
+
+For every risk, identify the existing mitigation, remaining limitation, and recommended future improvement.
+
+### 5.10 Current limitations
+
+Explicitly state:
+
+- The server exposes no sending or deletion tools.
+- This does not guarantee that the host cannot attempt those operations through another connector.
+- The declared OAuth scopes and the MCP tool interface are different security layers.
+- Effective account grants and complete runtime permissions were not independently verified.
+- Duplicate prevention is not enforced by the server.
+- Availability checks and event insertion are separate operations.
+- The self-test does not assert the success of every API operation.
+- Automated write-operation tests are absent.
+- Not all meeting-coordinator outcomes have been demonstrated.
+- No measured L05 versus L06 token-cost comparison is available.
+
+### 5.11 Future improvements
+
+Document potential improvements without implementing them:
+
+- Stronger automated assertions.
+- Mock-based tests without live Google operations.
+- Server-side duplicate detection.
+- Idempotent event creation.
+- Conflict validation.
+- Dedicated synthetic test emails.
+- Least-privilege authorization.
+- Explicit host permission boundaries.
+
+### 5.12 Collaboration
+
+Accurately describe Livnat's original development contribution and Liat's documentation, reflection, requirements engineering, and review contribution.
+
+Do not claim that Liat independently reran the live Google scenarios.
+
+## 6. Rewrite and improve README.md in Hebrew
+
+Translate all explanatory README content into natural Hebrew while preserving its original factual content.
+
+Make the README the primary entry point for the lecturer.
+
+Use a clean, professional Markdown structure with correct RTL presentation.
+
+Include:
+
+1. Project title and assignment identification.
+2. Group ID and both contributors.
+3. Project overview and objectives.
+4. System architecture.
+5. Six MCP tools and their actual parameters.
+6. Technology stack.
+7. Prerequisites and authentication setup.
+8. Installation and configuration instructions.
+9. Original self-test instructions and their limitations.
+10. Demonstrated usage examples.
+11. Successful Gmail and Calendar evidence.
+12. Meeting-coordinator workflow.
+13. Security and permission boundaries.
+14. Lessons learned and current limitations.
+15. Repository structure.
+16. Documentation links.
+17. Collaboration and division of responsibilities.
+18. Transparent AI-use disclosure.
+
+Preserve the existing technical commands and configuration examples.
+
+Use a GitHub-compatible Mermaid diagram illustrating the normal project architecture:
+
+User request → Claude Code → MCP server → six tools → Google APIs.
+
+Clearly distinguish the normal MCP path from possible alternate host connector paths.
+
+Do not imply that the six-tool boundary controls all host capabilities.
+
+Keep the architecture diagram outside any HTML RTL container if necessary for reliable GitHub Mermaid rendering.
+
+Preserve the original three screenshots:
+
+- `screenshots/01_mcp_connected.png`
+- `screenshots/02_gmail_drafts.png`
+- `screenshots/03_calendar_events.png`
+
+Give each screenshot a meaningful Hebrew caption.
+
+Retain existing screenshots at their original resolution and verify that all relative image links resolve.
+
+Do not generate replacement screenshots or fabricate new evidence.
+
+Perform a privacy review of the existing public screenshots without reproducing personal information in the report.
+
+If a screenshot contains sensitive information, do not publish additional copies. Report the issue and stop publication if necessary.
+
+Include the actual repository structure, including:
+
+- `README.md`
+- `PRD.md`
+- `PROMPTS.md`
+- `reflection.md`
+- `CLAUDE.md`
+- `server.py`
+- `google_auth.py`
+- `test_server.py`
+- `pyproject.toml`
+- `uv.lock`
+- `.gitignore`
+- `screenshots/`
+
+Include any additional documentation files created during this task.
+
+## 7. Update PROMPTS.md
+
+Preserve Livnat's existing prompts, original wording, translations, lesson prompts, and execution outcomes.
+
+Do not erase or replace the original development history.
+
+Add a clearly separated section documenting Liat's contribution through Codex.
+
+Include:
+
+- The previous read-only reflection-preparation prompt.
+- The purpose of the repository analysis.
+- The key findings from that analysis.
+- This complete documentation and publication prompt.
+- The documentation changes actually performed.
+- The validation activities actually performed.
+- The distinction between original live execution and the later documentation-only review.
+
+Save the two actual Codex prompts verbatim in separate Markdown or text files under a `prompts/` directory.
+
+Retrieve the previous prompt from the current session only if its exact text is available.
+
+If the exact prior prompt cannot be recovered, document that limitation rather than inventing or reconstructing a supposedly verbatim prompt.
+
+Correct the ambiguous claim that the existing numbered steps are strictly chronological.
+
+Preserve the original step numbers and historical order unless evidence establishes a different execution order.
+
+Explain why step 12 appears after step 14 if the explanation is documented. Otherwise, identify it as a documentation-order ambiguity.
+
+Clarify that the six-tool restriction represented the intended project boundary and that an alternate connector attempt was reported.
+
+Do not invent sanitized tool arguments, approval decisions, connector identities, or execution timestamps that are unavailable.
+
+## 8. Document collaboration
+
+Create a concise `COLLABORATION.md` in Hebrew.
+
+Include:
+
+- Group ID LIATLVNT.
+- Both contributors.
+- Livnat's original implementation and testing responsibilities.
+- Liat's reflection, requirements, documentation, and critical-review responsibilities.
+- Actual local branch name.
+- Actual baseline commit.
+- Work performed during this session.
+- Current publication and review status.
+- GitHub workflow.
+- Explicit distinction between Git Pull, Commit, Push, Pull Request, and Merge.
+
+Document only Git actions that actually occurred.
+
+Do not invent the output of Liat's earlier manual Git Pull if that output is unavailable.
+
+Do not imply that a Git Pull alone establishes a public GitHub contribution.
+
+Do not claim that Livnat has reviewed or merged the contribution before she actually does so.
+
+## 9. Quality assurance
+
+Perform documentation-only validation.
+
+Verify:
+
+- README is written in Hebrew.
+- PRD is complete and written in Hebrew.
+- Reflection contains all four required questions.
+- Approved reflection wording is preserved.
+- Original technical work log is preserved.
+- Prompt history is authentic.
+- Original documentation evidence is not lost.
+- All six tools match the actual implementation.
+- All documented parameters match the source.
+- All screenshot links resolve.
+- All internal documentation links resolve.
+- Markdown formatting is consistent.
+- RTL handling does not break code blocks, tables, images, or Mermaid diagrams.
+- No unsupported claims of successful execution were added.
+- No confidential credentials or personal data were introduced.
+- No Python source or runtime files were modified.
+- No original screenshot was modified.
+- Git diff contains only authorized documentation changes.
+
+Validate the Mermaid syntax structurally without installing packages.
+
+Do not claim that visual rendering was verified unless it was actually inspected.
+
+Review the final documentation from the lecturer's perspective.
+
+Confirm that the core submission requirements are represented, including:
+
+- Separate GitHub repository.
+- Project source files.
+- README with actual Gmail and Calendar screenshots.
+- PRD.
+- Reflection.
+- Student collaboration.
+- Prompt documentation.
+- Transparent limitations.
+
+Do not execute `test_server.py` because it may call Google APIs.
+
+Do not run live integration tests.
+
+## 10. GitHub publication
+
+Liat explicitly authorizes the following actions:
+
+- Fetching remote metadata.
+- Staging the reviewed documentation files.
+- Creating a commit under her verified Git identity.
+- Pushing to her personal working branch.
+- Verifying the remote commit.
+- Opening a Pull Request into `main`.
+- Requesting review from `greenlivnat` if supported.
+
+Before committing:
+
+1. Inspect the complete Git diff.
+2. Verify that only intended documentation files have changed.
+3. Check for whitespace and formatting problems.
+4. Check for confidential information without accessing private credential files.
+5. Verify original implementation and screenshot integrity.
+6. Stage only explicitly reviewed files.
+
+Do not use indiscriminate staging if unrelated files exist.
+
+Create a meaningful commit using the following suggested message:
+
+`Complete Hebrew reflection, PRD and project documentation for Assignment 03`
+
+Push to:
+
+`liat/assignment03-reflection-documentation`
+
+Verify that the remote commit hash matches the local commit hash.
+
+Create a Pull Request targeting `main`.
+
+Suggested PR title:
+
+`Assignment 03 — Hebrew Reflection, PRD and Documentation Completion`
+
+Suggested PR description:
+
+- Completed the Hebrew reflection based on the documented project experience.
+- Added a comprehensive PRD with requirements and acceptance criteria.
+- Translated and improved README documentation.
+- Preserved original Gmail and Calendar screenshots.
+- Updated authentic prompt history.
+- Documented security boundaries and known limitations.
+- Recorded individual student contributions.
+- Preserved the original MCP implementation without modification.
+- Performed documentation-only validation.
+
+Request Livnat as reviewer where technically supported.
+
+If an appropriate Pull Request already exists, update it rather than creating a duplicate.
+
+Use the supported permission-request mechanism for specific Git commands if sandbox permissions require it.
+
+Do not bypass security controls.
+
+Do not install GitHub CLI.
+
+If Pull Request creation is unavailable, provide the verified branch URL, the appropriate GitHub comparison link, and the complete PR title and description for manual creation.
+
+Do not push directly to `main`.
+
+Do not force-push.
+
+Do not merge the Pull Request.
+
+Do not create a release.
+
+## 11. Final assessment
+
+After completing the documentation, perform a concise evidence-based self-assessment using the following provisional rubric:
+
+| Category | Maximum points |
+|---|---:|
+| Core MCP implementation and functional evidence | 30 |
+| Gmail and Calendar screenshots | 15 |
+| Reflection quality and critical understanding | 20 |
+| PRD and requirements traceability | 15 |
+| README and prompt documentation | 10 |
+| GitHub collaboration and individual contribution | 10 |
+| Total | 100 |
+
+This is an internal evaluation framework, not an official lecturer-provided grading rubric.
+
+For every category, provide:
+
+- Proposed score.
+- Evidence supporting the score.
+- Remaining limitations.
+
+Do not award credit for undocumented or unverified activities.
+
+Distinguish completed collaboration from pending review, merge, and final Git Pull.
+
+## 12. Mandatory final report
+
+Return a structured report in English containing:
+
+### A. Documentation status
+
+| Document | Action | Status |
+|---|---|---|
+| reflection.md | Completed Hebrew reflection | |
+| PRD.md | Created requirements document | |
+| README.md | Translated and improved | |
+| PROMPTS.md | Updated authentic prompt history | |
+| COLLABORATION.md | Documented student contributions | |
+| Prompt files | Preserved actual prompts | |
+
+### B. Validation results
+
+- Number of documentation checks performed.
+- Passed checks.
+- Failed checks.
+- Warnings.
+- Screenshot integrity.
+- Source-code integrity.
+- Internal link status.
+- Privacy review.
+- Hebrew and RTL status.
+
+### C. GitHub publication
+
+- Baseline commit.
+- New commit hash.
+- Actual commit author.
+- Changed-file count.
+- Complete changed-file list.
+- Push status.
+- Remote branch URL.
+- Remote commit verification.
+- Pull Request URL.
+- Pull Request status.
+- Reviewer request status.
+
+### D. Remaining limitations
+
+List only genuine unresolved limitations.
+
+### E. Recommended self-assessment
+
+Provide the provisional score and explain deductions.
+
+### F. Final decision
+
+Return one accurate final decision:
+
+- GO — DOCUMENTATION CONTRIBUTION PUBLISHED AND READY FOR REVIEW.
+- GO — DOCUMENTATION COMPLETED, MANUAL GITHUB ACTION REQUIRED.
+- NO-GO — MATERIAL DOCUMENTATION, PRIVACY OR PUBLICATION ISSUE REMAINS.
+
+Execute the complete workflow now.
+
+Do not stop after planning. Do not ask for additional conversational approval. Preserve the original working implementation and finish all authorized documentation and publication tasks.# ASSIGNMENT 03 — FINAL DOCUMENTATION, REFLECTION AND COLLABORATIVE GITHUB PUBLICATION
+
+## 1. Project context
+
+You are completing Assignment 03 of the Generative AI course at Bar-Ilan University.
+
+- Assignment: 03 — MCP Gmail and Google Calendar
+- Group ID: LIATLVNT
+- Students: Liat Kafezider and Livnat Benson
+- Repository: https://github.com/greenlivnat/HW3
+- Local directory: `D:\HW3`
+- Repository owner: `greenlivnat`
+- Contributor: `liatkaf`
+- Git author: Liat Kafezider
+- Personal working branch: `liat/assignment03-reflection-documentation`
+- Target branch: `main`
+
+Livnat has already developed the MCP server, configured the Google integration, executed the assignment scenarios, collected screenshots, and documented the initial implementation using Claude Code.
+
+Liat has already cloned the repository, created her personal working branch, and instructed Codex to perform a read-only repository review. That review has been completed in this session.
+
+Liat's contribution is focused on reflection, requirements engineering, documentation quality, critical analysis, and collaborative GitHub publication.
+
+Use the findings from your immediately preceding repository analysis as the factual foundation for this task.
+
+Do not repeat the implementation or live Google experiments.
+
+## 2. Execution rules
+
+Complete the entire task autonomously.
+
+- Do not ask questions.
+- Do not request conversational approval.
+- Do not stop after presenting a plan.
+- Do not repeat the previous repository analysis unnecessarily.
+- Do not install software or dependencies.
+- Do not modify the working MCP server.
+- Do not modify Python source files, tests, authentication code, dependency files, or runtime configurations.
+- Do not access Gmail or Google Calendar.
+- Do not create, send, edit, forward, or delete emails.
+- Do not create, edit, or delete calendar events.
+- Do not access private credentials or authentication tokens.
+- Do not overwrite Livnat's original contribution.
+- Do not fabricate test results, screenshots, tool calls, student activities, or Git history.
+- Respect system-enforced security and permission requests.
+
+All new explanatory project documentation must be written in natural, professional Hebrew.
+
+Preserve English technical terminology, commands, function names, filenames, code examples, URLs, and original prompts where appropriate.
+
+Ensure correct RTL rendering and readability of mixed Hebrew-English content on GitHub.
+
+## 3. Preserve the baseline
+
+Before modifying files:
+
+1. Verify the current repository and remote origin.
+2. Verify the active personal branch.
+3. Verify Git author identity.
+4. Record the actual baseline commit hash.
+5. Inspect the working tree.
+6. Verify that the branch is based on the intended shared project.
+7. Fetch remote metadata using the supported permission mechanism if required.
+8. Check whether upstream changes or unrelated local modifications exist.
+
+Do not discard, overwrite, or silently incorporate unrelated changes.
+
+Preserve all original implementation files and existing screenshots.
+
+The intended modification scope is documentation only.
+
+## 4. Complete reflection.md
+
+The lecturer requires answers to four reflection questions. The students are responsible for the answers, while the agent assists with structure and repository integration.
+
+The following Hebrew text has been reviewed and approved by Liat for integration into the project documentation. It was developed with AI-assisted editing based on Livnat's documented implementation and Liat's review of the Codex findings.
+
+Preserve this text without substantive rewriting. Do not invent additional personal experiences or present AI-assisted drafting as unaided student authorship.
+
+Retain the original supporting check tables, screenshots, technical work log, setup incidents, and other factual evidence from Livnat's existing reflection. Translate their explanatory content into Hebrew where necessary.
+
+Clearly separate the four reflection answers from the supporting technical evidence.
+
+### Approved reflection text
+
+# רפלקציה – מטלה 03
+
+## 1. מה ביקשנו מהסוכן לבצע?
+
+במסגרת המטלה ביקשנו מהסוכן לבנות שרת MCP שיאפשר למודל השפה לעבוד עם Gmail ועם Google Calendar. הגדרנו שישה כלים המאפשרים חיפוש וקריאת מיילים, יצירת טיוטות, הצגת אירועים ביומן, איתור זמנים פנויים ויצירת אירועים.
+
+לאחר הקמת השרת, ביקשנו מהסוכן לבצע מספר משימות באמצעות הוראות בשפה טבעית, ובהן יצירת טיוטת מייל, קביעת אירוע בעוד ארבע שעות ומציאת זמן פנוי למפגש לימודים.
+
+בנוסף, ביקשנו לבחון את יכולתו להתמודד עם משימה מורכבת יותר באמצעות שילוב בין הכלים. לשם כך הגדרנו תרחיש שבו הסוכן נדרש לאתר בקשה לפגישה במייל, לבדוק את הזמינות ביומן ובהתאם לכך לקבוע פגישה ולהכין טיוטת תשובה, או להציע שני מועדים חלופיים.
+
+## 2. כיצד בדקנו שהתוצאה נכונה?
+
+לא הסתפקנו בהודעת הסוכן שהמשימה בוצעה בהצלחה, אלא בדקנו את התוצאות בפועל בממשקים של Gmail ושל Google Calendar.
+
+וידאנו שהמייל נשמר בתיקיית הטיוטות ושהאירוע הופיע ביומן במועד המבוקש. לדוגמה, כאשר ניתנה בשעה 16:04 ההנחיה ליצור אירוע בעוד ארבע שעות, האירוע נקבע לשעה 20:04. תיעדנו את התוצאות באמצעות צילומי מסך.
+
+במהלך העבודה נתקלנו במקרה שבו הסוכן לא מצא זמן פנוי ביום שנראה לנו פנוי. לאחר בדיקת המידע שהתקבל מה־API, התברר שקיים אירוע שחוסם את הזמינות באותו יום. מכך למדנו שלא כל תוצאה בלתי צפויה מעידה על תקלה בקוד, ושחשוב לבדוק את מקור הנתונים לפני שמבצעים שינויים.
+
+בתרחיש תיאום הפגישות הסוכן בחר מייל אמיתי, מאחר שלא הוכן מראש מייל ייעודי לבדיקה. לפי תיעוד ההרצה, הסוכן זיהה שהפגישה כבר קיימת ביומן, נמנע מיצירת אירוע נוסף והכין טיוטת תשובה. עם זאת, מניעת כפילויות במקרה זה התבססה על שיקול דעתו של הסוכן ולא על מנגנון מובנה בקוד.
+
+מסקנתנו היא שבדיקת תוצרי הסוכן חשובה לא פחות מבדיקת הקוד עצמו, וכי כדאי להגדיר מראש תרחישי בדיקה מבוקרים.
+
+## 3. איזה כלי בחרנו שלא לכלול ומדוע?
+
+בחרנו שלא לכלול כלים לשליחת מיילים ולמחיקת מיילים או אירועים ביומן. רצינו לאפשר לסוכן לסייע בביצוע משימות, מבלי לתת לו סמכות לבצע פעולות שעלולות לגרום לנזק או להתבצע ללא אישור המשתמש.
+
+אחת הסיבות לכך היא שמיילים עשויים להכיל הוראות שמנסות להשפיע על התנהגות הסוכן ולגרום לו לבצע פעולות שלא התבקש לבצע. לכן הגדרנו שתוכן המייל ייחשב למידע בלבד ולא להוראה עבור הסוכן.
+
+במהלך בדיקת גבולות המערכת גילינו נקודה שלא צפינו מראש: כאשר הסוכן התבקש למחוק אירוע, הוא ניסה להשתמש במחבר אחר שהיה זמין בסביבת העבודה. הפעולה נעצרה בעקבות מנגנון בקשת ההרשאה.
+
+ממקרה זה למדנו שהגבלת הכלים בשרת ה־MCP אינה מספיקה בפני עצמה. יש להביא בחשבון גם את ההרשאות שניתנו לחשבון ואת הכלים הנוספים הזמינים לסוכן.
+
+מבחינתנו, האפשרות להכין טיוטת מייל מבלי לשלוח אותה יוצרת איזון נכון בין יעילות לבין שליטה אנושית. הסוכן מבצע את עבודת ההכנה, אך ההחלטה הסופית נשארת בידי המשתמש.
+
+## 4. מה השתנה בין שיעור 5 לשיעור 6?
+
+בשיעור 5 עבדנו עם קוד Python שפנה ישירות ל־API של Gmail ושל Google Calendar. סדר הפעולות הוגדר מראש בקוד, ולכן שינוי מהותי במשימה הצריך התאמה של התוכנית.
+
+בשיעור 6 השתמשנו ב־MCP כדי להעמיד לרשות הסוכן מספר כלים קבועים, כאשר הסוכן עצמו מחליט באילו כלים להשתמש, באיזה סדר ואילו פרמטרים להעביר להם, בהתאם לבקשה.
+
+חשוב לציין שהשימוש ב־API לא נעלם. הכלים בשרת ה־MCP עדיין פונים ל־API של Google, אך השינוי הוא באופן שבו נבחרות ומופעלות הפעולות.
+
+היתרון המרכזי שזיהינו הוא הגמישות. באמצעות אותם שישה כלים הצלחנו לבצע מספר משימות שונות, מבלי לכתוב תוכנית חדשה עבור כל משימה.
+
+מצד שני, העצמאות שניתנת לסוכן מחייבת אותנו להקדיש יותר תשומת לב להגדרת הרשאות, למגבלות המערכת ולבדיקת התוצאות. אם בשיעור 5 שלטנו ישירות ברצף הפעולות, בשיעור 6 למדנו לנהל מערכת שמקבלת חלק מההחלטות בעצמה.
+
+מבחינתנו, זהו השינוי המשמעותי ביותר בין השיעורים: המעבר מהגדרת רצף פעולות קבוע להגדרת כלים, כללים וגבולות שבתוכם הסוכן יכול לפעול.
+
+### End of approved reflection text
+
+After integrating the reflection:
+
+- Preserve and translate Livnat's supporting work log.
+- Update the existing verification table.
+- Include the documented meeting-coordinator outcome.
+- Correct the description of the permission-boundary experiment.
+- Distinguish screenshots, source-code findings, and reported execution outcomes.
+- Document the limitations of the self-test.
+- Document the absence of server-side duplicate prevention.
+- Do not claim that all meeting-coordinator branches were successfully tested.
+- Do not claim that token consumption was measured.
+- Identify the L05 comparison as based on the documented retrospective where the original L05 source is unavailable.
+
+## 5. Create PRD.md
+
+Create a complete, standalone Product Requirements Document in Hebrew at the repository root.
+
+The PRD must accurately represent the implemented system rather than an imaginary expanded product.
+
+Use the following structure:
+
+### 5.1 Project identification
+
+- Project name.
+- Assignment number.
+- Group ID.
+- Contributors.
+- Document purpose.
+- Current project status.
+
+### 5.2 Background and objectives
+
+Explain the educational purpose of connecting an LLM to external tools.
+
+Explain the transition from fixed API workflows in L05 to reusable MCP tools in L06.
+
+### 5.3 Scope
+
+Define implemented capabilities and explicitly excluded capabilities.
+
+Distinguish the project MCP server's scope from the capabilities of the surrounding AI host.
+
+### 5.4 Functional requirements
+
+Create uniquely identified functional requirements for all six implemented MCP tools:
+
+- `search_emails`
+- `read_email`
+- `create_draft`
+- `list_events`
+- `find_free_slots`
+- `create_event`
+
+Inspect the actual implementation for signatures, parameter names, default values, validation, and behavior.
+
+Include the Gmail profile lookup used when the draft recipient is specified as `me`.
+
+Include the optional `day_start` and `day_end` parameters of `find_free_slots`.
+
+Do not invent functionality.
+
+### 5.5 Non-functional requirements
+
+Cover:
+
+- Privacy.
+- Credential protection.
+- Security.
+- Human supervision.
+- Usability.
+- Maintainability.
+- Reusability.
+- Error reporting.
+- Time-zone consistency.
+- Separation between information and instructions contained in emails.
+
+Distinguish current implementation from desired future guarantees.
+
+### 5.6 System architecture
+
+Describe:
+
+- Natural-language user request.
+- Claude Code as the demonstrated runtime host.
+- MCP protocol.
+- FastMCP server.
+- Python functions.
+- OAuth authentication.
+- Gmail API.
+- Google Calendar API.
+- stdio transport and uv execution.
+
+Document other host configurations as examples only unless execution evidence exists.
+
+### 5.7 Use cases
+
+Include:
+
+- Listing calendar events.
+- Creating a Gmail draft.
+- Creating a calendar event at a requested relative time.
+- Finding availability for a study meeting.
+- Coordinating a meeting from an email request.
+- Handling an existing meeting.
+- Handling unavailable time.
+- Challenging the system's permission boundaries.
+
+Distinguish requested behavior from demonstrated outcomes.
+
+### 5.8 Acceptance criteria
+
+Define clear and measurable acceptance criteria for each core requirement.
+
+Include a traceability matrix containing:
+
+- Requirement ID.
+- Requirement description.
+- Acceptance criterion.
+- Evidence source.
+- Verification status.
+- Known limitation.
+
+Use accurate evidence classifications:
+
+- Implemented in source code.
+- Corroborated by screenshots.
+- Reported in the original execution log.
+- Partially verified.
+- Not verified.
+- Future improvement.
+
+Do not mark an acceptance criterion as passed without supporting evidence.
+
+### 5.9 Risk assessment
+
+Include a concise risk table covering:
+
+- Prompt injection through email content.
+- Unauthorized email sending.
+- Unauthorized deletion.
+- Alternate host connectors.
+- Broad OAuth authorization scopes.
+- Unwanted drafts or events.
+- Duplicate calendar events.
+- Overlapping events.
+- Availability changing between checking and event creation.
+- Accidental disclosure of credentials.
+- Use of real inbox content during testing.
+- False-positive self-test results.
+
+For every risk, identify the existing mitigation, remaining limitation, and recommended future improvement.
+
+### 5.10 Current limitations
+
+Explicitly state:
+
+- The server exposes no sending or deletion tools.
+- This does not guarantee that the host cannot attempt those operations through another connector.
+- The declared OAuth scopes and the MCP tool interface are different security layers.
+- Effective account grants and complete runtime permissions were not independently verified.
+- Duplicate prevention is not enforced by the server.
+- Availability checks and event insertion are separate operations.
+- The self-test does not assert the success of every API operation.
+- Automated write-operation tests are absent.
+- Not all meeting-coordinator outcomes have been demonstrated.
+- No measured L05 versus L06 token-cost comparison is available.
+
+### 5.11 Future improvements
+
+Document potential improvements without implementing them:
+
+- Stronger automated assertions.
+- Mock-based tests without live Google operations.
+- Server-side duplicate detection.
+- Idempotent event creation.
+- Conflict validation.
+- Dedicated synthetic test emails.
+- Least-privilege authorization.
+- Explicit host permission boundaries.
+
+### 5.12 Collaboration
+
+Accurately describe Livnat's original development contribution and Liat's documentation, reflection, requirements engineering, and review contribution.
+
+Do not claim that Liat independently reran the live Google scenarios.
+
+## 6. Rewrite and improve README.md in Hebrew
+
+Translate all explanatory README content into natural Hebrew while preserving its original factual content.
+
+Make the README the primary entry point for the lecturer.
+
+Use a clean, professional Markdown structure with correct RTL presentation.
+
+Include:
+
+1. Project title and assignment identification.
+2. Group ID and both contributors.
+3. Project overview and objectives.
+4. System architecture.
+5. Six MCP tools and their actual parameters.
+6. Technology stack.
+7. Prerequisites and authentication setup.
+8. Installation and configuration instructions.
+9. Original self-test instructions and their limitations.
+10. Demonstrated usage examples.
+11. Successful Gmail and Calendar evidence.
+12. Meeting-coordinator workflow.
+13. Security and permission boundaries.
+14. Lessons learned and current limitations.
+15. Repository structure.
+16. Documentation links.
+17. Collaboration and division of responsibilities.
+18. Transparent AI-use disclosure.
+
+Preserve the existing technical commands and configuration examples.
+
+Use a GitHub-compatible Mermaid diagram illustrating the normal project architecture:
+
+User request → Claude Code → MCP server → six tools → Google APIs.
+
+Clearly distinguish the normal MCP path from possible alternate host connector paths.
+
+Do not imply that the six-tool boundary controls all host capabilities.
+
+Keep the architecture diagram outside any HTML RTL container if necessary for reliable GitHub Mermaid rendering.
+
+Preserve the original three screenshots:
+
+- `screenshots/01_mcp_connected.png`
+- `screenshots/02_gmail_drafts.png`
+- `screenshots/03_calendar_events.png`
+
+Give each screenshot a meaningful Hebrew caption.
+
+Retain existing screenshots at their original resolution and verify that all relative image links resolve.
+
+Do not generate replacement screenshots or fabricate new evidence.
+
+Perform a privacy review of the existing public screenshots without reproducing personal information in the report.
+
+If a screenshot contains sensitive information, do not publish additional copies. Report the issue and stop publication if necessary.
+
+Include the actual repository structure, including:
+
+- `README.md`
+- `PRD.md`
+- `PROMPTS.md`
+- `reflection.md`
+- `CLAUDE.md`
+- `server.py`
+- `google_auth.py`
+- `test_server.py`
+- `pyproject.toml`
+- `uv.lock`
+- `.gitignore`
+- `screenshots/`
+
+Include any additional documentation files created during this task.
+
+## 7. Update PROMPTS.md
+
+Preserve Livnat's existing prompts, original wording, translations, lesson prompts, and execution outcomes.
+
+Do not erase or replace the original development history.
+
+Add a clearly separated section documenting Liat's contribution through Codex.
+
+Include:
+
+- The previous read-only reflection-preparation prompt.
+- The purpose of the repository analysis.
+- The key findings from that analysis.
+- This complete documentation and publication prompt.
+- The documentation changes actually performed.
+- The validation activities actually performed.
+- The distinction between original live execution and the later documentation-only review.
+
+Save the two actual Codex prompts verbatim in separate Markdown or text files under a `prompts/` directory.
+
+Retrieve the previous prompt from the current session only if its exact text is available.
+
+If the exact prior prompt cannot be recovered, document that limitation rather than inventing or reconstructing a supposedly verbatim prompt.
+
+Correct the ambiguous claim that the existing numbered steps are strictly chronological.
+
+Preserve the original step numbers and historical order unless evidence establishes a different execution order.
+
+Explain why step 12 appears after step 14 if the explanation is documented. Otherwise, identify it as a documentation-order ambiguity.
+
+Clarify that the six-tool restriction represented the intended project boundary and that an alternate connector attempt was reported.
+
+Do not invent sanitized tool arguments, approval decisions, connector identities, or execution timestamps that are unavailable.
+
+## 8. Document collaboration
+
+Create a concise `COLLABORATION.md` in Hebrew.
+
+Include:
+
+- Group ID LIATLVNT.
+- Both contributors.
+- Livnat's original implementation and testing responsibilities.
+- Liat's reflection, requirements, documentation, and critical-review responsibilities.
+- Actual local branch name.
+- Actual baseline commit.
+- Work performed during this session.
+- Current publication and review status.
+- GitHub workflow.
+- Explicit distinction between Git Pull, Commit, Push, Pull Request, and Merge.
+
+Document only Git actions that actually occurred.
+
+Do not invent the output of Liat's earlier manual Git Pull if that output is unavailable.
+
+Do not imply that a Git Pull alone establishes a public GitHub contribution.
+
+Do not claim that Livnat has reviewed or merged the contribution before she actually does so.
+
+## 9. Quality assurance
+
+Perform documentation-only validation.
+
+Verify:
+
+- README is written in Hebrew.
+- PRD is complete and written in Hebrew.
+- Reflection contains all four required questions.
+- Approved reflection wording is preserved.
+- Original technical work log is preserved.
+- Prompt history is authentic.
+- Original documentation evidence is not lost.
+- All six tools match the actual implementation.
+- All documented parameters match the source.
+- All screenshot links resolve.
+- All internal documentation links resolve.
+- Markdown formatting is consistent.
+- RTL handling does not break code blocks, tables, images, or Mermaid diagrams.
+- No unsupported claims of successful execution were added.
+- No confidential credentials or personal data were introduced.
+- No Python source or runtime files were modified.
+- No original screenshot was modified.
+- Git diff contains only authorized documentation changes.
+
+Validate the Mermaid syntax structurally without installing packages.
+
+Do not claim that visual rendering was verified unless it was actually inspected.
+
+Review the final documentation from the lecturer's perspective.
+
+Confirm that the core submission requirements are represented, including:
+
+- Separate GitHub repository.
+- Project source files.
+- README with actual Gmail and Calendar screenshots.
+- PRD.
+- Reflection.
+- Student collaboration.
+- Prompt documentation.
+- Transparent limitations.
+
+Do not execute `test_server.py` because it may call Google APIs.
+
+Do not run live integration tests.
+
+## 10. GitHub publication
+
+Liat explicitly authorizes the following actions:
+
+- Fetching remote metadata.
+- Staging the reviewed documentation files.
+- Creating a commit under her verified Git identity.
+- Pushing to her personal working branch.
+- Verifying the remote commit.
+- Opening a Pull Request into `main`.
+- Requesting review from `greenlivnat` if supported.
+
+Before committing:
+
+1. Inspect the complete Git diff.
+2. Verify that only intended documentation files have changed.
+3. Check for whitespace and formatting problems.
+4. Check for confidential information without accessing private credential files.
+5. Verify original implementation and screenshot integrity.
+6. Stage only explicitly reviewed files.
+
+Do not use indiscriminate staging if unrelated files exist.
+
+Create a meaningful commit using the following suggested message:
+
+`Complete Hebrew reflection, PRD and project documentation for Assignment 03`
+
+Push to:
+
+`liat/assignment03-reflection-documentation`
+
+Verify that the remote commit hash matches the local commit hash.
+
+Create a Pull Request targeting `main`.
+
+Suggested PR title:
+
+`Assignment 03 — Hebrew Reflection, PRD and Documentation Completion`
+
+Suggested PR description:
+
+- Completed the Hebrew reflection based on the documented project experience.
+- Added a comprehensive PRD with requirements and acceptance criteria.
+- Translated and improved README documentation.
+- Preserved original Gmail and Calendar screenshots.
+- Updated authentic prompt history.
+- Documented security boundaries and known limitations.
+- Recorded individual student contributions.
+- Preserved the original MCP implementation without modification.
+- Performed documentation-only validation.
+
+Request Livnat as reviewer where technically supported.
+
+If an appropriate Pull Request already exists, update it rather than creating a duplicate.
+
+Use the supported permission-request mechanism for specific Git commands if sandbox permissions require it.
+
+Do not bypass security controls.
+
+Do not install GitHub CLI.
+
+If Pull Request creation is unavailable, provide the verified branch URL, the appropriate GitHub comparison link, and the complete PR title and description for manual creation.
+
+Do not push directly to `main`.
+
+Do not force-push.
+
+Do not merge the Pull Request.
+
+Do not create a release.
+
+## 11. Final assessment
+
+After completing the documentation, perform a concise evidence-based self-assessment using the following provisional rubric:
+
+| Category | Maximum points |
+|---|---:|
+| Core MCP implementation and functional evidence | 30 |
+| Gmail and Calendar screenshots | 15 |
+| Reflection quality and critical understanding | 20 |
+| PRD and requirements traceability | 15 |
+| README and prompt documentation | 10 |
+| GitHub collaboration and individual contribution | 10 |
+| Total | 100 |
+
+This is an internal evaluation framework, not an official lecturer-provided grading rubric.
+
+For every category, provide:
+
+- Proposed score.
+- Evidence supporting the score.
+- Remaining limitations.
+
+Do not award credit for undocumented or unverified activities.
+
+Distinguish completed collaboration from pending review, merge, and final Git Pull.
+
+## 12. Mandatory final report
+
+Return a structured report in English containing:
+
+### A. Documentation status
+
+| Document | Action | Status |
+|---|---|---|
+| reflection.md | Completed Hebrew reflection | |
+| PRD.md | Created requirements document | |
+| README.md | Translated and improved | |
+| PROMPTS.md | Updated authentic prompt history | |
+| COLLABORATION.md | Documented student contributions | |
+| Prompt files | Preserved actual prompts | |
+
+### B. Validation results
+
+- Number of documentation checks performed.
+- Passed checks.
+- Failed checks.
+- Warnings.
+- Screenshot integrity.
+- Source-code integrity.
+- Internal link status.
+- Privacy review.
+- Hebrew and RTL status.
+
+### C. GitHub publication
+
+- Baseline commit.
+- New commit hash.
+- Actual commit author.
+- Changed-file count.
+- Complete changed-file list.
+- Push status.
+- Remote branch URL.
+- Remote commit verification.
+- Pull Request URL.
+- Pull Request status.
+- Reviewer request status.
+
+### D. Remaining limitations
+
+List only genuine unresolved limitations.
+
+### E. Recommended self-assessment
+
+Provide the provisional score and explain deductions.
+
+### F. Final decision
+
+Return one accurate final decision:
+
+- GO — DOCUMENTATION CONTRIBUTION PUBLISHED AND READY FOR REVIEW.
+- GO — DOCUMENTATION COMPLETED, MANUAL GITHUB ACTION REQUIRED.
+- NO-GO — MATERIAL DOCUMENTATION, PRIVACY OR PUBLICATION ISSUE REMAINS.
+
+Execute the complete workflow now.
+
+Do not stop after planning. Do not ask for additional conversational approval. Preserve the original working implementation and finish all authorized documentation and publication tasks.

@@ -1,0 +1,70 @@
+# Assignment 03 — Reflection Preparation
+
+You are working on Assignment 03 of the Generative AI course at Bar-Ilan University.
+
+Project details:
+- Repository: https://github.com/greenlivnat/HW3
+- Local directory: D:\HW3
+- Group ID: LIATLVNT
+- Contributors: Liat Kafezider and Livnat Benson
+- Current branch: liat/assignment03-reflection-documentation
+
+Livnat has already implemented the project. Liat is responsible for completing the reflection and improving the project documentation.
+
+## Task
+
+Perform a read-only analysis of the existing repository.
+
+Read the README, existing reflection, prompt history, MCP server source code, configuration examples, screenshots, and any other relevant documentation.
+
+Extract the documented facts required to answer the following four reflection questions:
+
+1. What did we ask the agent?
+2. How did we check that the result is correct?
+3. Which tool did we leave out, and why?
+4. L05 vs L06: what changed?
+
+For each question, provide:
+
+- Relevant documented facts.
+- Specific examples from the project.
+- Evidence and source file references.
+- Relevant student decisions.
+- Unexpected agent behavior, if documented.
+- Limitations and lessons learned.
+- Any missing information or unverified assumptions.
+
+Pay particular attention to:
+
+- Gmail draft creation.
+- Google Calendar event creation.
+- MCP tool selection.
+- The distinction between deterministic API scripts and agent-driven MCP workflows.
+- Tools deliberately excluded from the MCP server.
+- Permission boundaries and safety.
+- Alternative connectors used or attempted by the agent.
+- Duplicate calendar event prevention.
+- Meeting coordination workflows.
+- Human supervision and decision-making.
+
+Additionally, provide a short inventory of the existing documentation, identifying what is missing or incomplete in README, PRD, PROMPTS, and reflection.md.
+
+## Mandatory constraints
+
+- This is a read-only task.
+- Do not modify any files.
+- Do not write the final reflection on behalf of the students.
+- Do not modify the existing source code.
+- Do not call Gmail or Google Calendar APIs.
+- Do not create emails, drafts, or calendar events.
+- Do not access or expose credentials, tokens, or private information.
+- Do not install dependencies.
+- Do not repeat previously completed experiments.
+- Do not commit or push anything.
+- Do not fabricate evidence or claim that documented tests were independently reproduced.
+- Distinguish verified repository content from inference.
+- Do not ask questions or request intermediate approval.
+
+Return a structured report in English, organized according to the four reflection questions, followed by the documentation inventory.
+
+Execute the repository analysis now.
